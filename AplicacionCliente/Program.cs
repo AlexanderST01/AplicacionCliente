@@ -2,8 +2,16 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using AplicacionCliente.Data;
 using AplicacionCliente.BLL;
+using AplicacionCliente.DAL;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var ConStr = builder.Configuration.GetConnectionString("ConStr");
+
+builder.Services.AddDbContext<Context>(options =>
+                options.UseSqlite(ConStr)
+            );
 
 // Add services to the container.
 builder.Services.AddRazorPages();

@@ -4,7 +4,6 @@ namespace AplicacionCliente.Models
 {
     public class Cliente
     {
-        [Required(ErrorMessage ="Es necesario que introdusca el ID")]
         public int ClienteId { get; set; }
         public string Nombre { get; set; }
         public string Telefono { get; set; }
