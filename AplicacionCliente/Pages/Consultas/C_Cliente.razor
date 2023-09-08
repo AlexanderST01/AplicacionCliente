@@ -1,0 +1,66 @@
+﻿@page "/ConsultaCliente"
+
+@using AplicacionCliente.BLL;
+@using AplicacionCliente.Models;
+
+@inject ClienteBLL clientesBLL
+
+<div>
+    <h3>Consulta Prioridades</h3>
+    <div class="input-group" style=" width: 60rem;">
+        <InputNumber @bind-Value="ID" class="form-control"></InputNumber>
+        <button type="button" class="btn btn-outline-primary oi oi-magnifying-glass" @onclick="Buscar"></button>
+        <button type="button" class="btn btn-outline-primary oi oi-reload" @onclick="Reiniciar"></button>
+    </div>
+    <table border="1" style=" width: 60rem;" class="table table-condensed table-bordered table-hover">
+        <thead>
+            <tr class="table-secondary">
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Celular</th>
+                <th scope="col">Rnc</th>
+                <th scope="col">Email</th>
+                <th scope="col">Direccion</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tabla in L_Cliente)
+            {
+                <tr>
+                    <th scope="row">@tabla.ClienteId</th>
+                    <th scope="row">@tabla.Nombre</th>
+                    <th scope="row">@tabla.Telefono</th>
+                    <th scope="row">@tabla.Celular</th>
+                    <th scope="row">@tabla.Rnc</th>
+                    <th scope="row">@tabla.Email</th>
+                    <th scope="row">@tabla.Direccion</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+@code {
+    public List<Cliente> L_Cliente { get; set; } = new List<Cliente>();
+
+    public int ID { get; set; }
+
+    protected override void OnInitialized()
+    {
+        L_Cliente = clientesBLL.GetList(g => true);
+    }
+
+    public void Buscar()
+    {
+        L_Cliente = clientesBLL.GetList(l => l.ClienteId == ID);
+    }
+
+    public void Reiniciar()
+    {
+        L_Cliente = clientesBLL.GetList(l => true);
+    }
+}

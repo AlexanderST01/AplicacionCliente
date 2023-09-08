@@ -38,7 +38,7 @@ namespace AplicacionCliente.BLL
             if (!Existe(cliente.ClienteId))
                 return this.Insertar(cliente);
             else
-                return this.Modificar(cliente);
+                return this.Modificar(cliente);   
         }
 
         public bool Eliminar(Cliente cliente)
@@ -56,7 +56,20 @@ namespace AplicacionCliente.BLL
                 .AsNoTracking()
                 .SingleOrDefault();
         }
-
+        public Cliente? BuscarNombre(String? nombre)
+        {
+            return _contexto.Clientes
+                .Where(b => b.Nombre == nombre)
+                .AsNoTracking()
+                .FirstOrDefault();
+        }
+        public Cliente? BuscarRnc(String? rnc)
+        {
+            return _contexto.Clientes
+                .Where(b => b.Rnc == rnc)
+                .AsNoTracking()
+                .FirstOrDefault();
+        }
         public List<Cliente> GetList(Expression<Func<Cliente, bool>> criterio)
         {
             return _contexto.Clientes

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using AplicacionCliente.Data;
+//using AplicacionCliente.Data;
 using AplicacionCliente.BLL;
 using AplicacionCliente.DAL;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +16,6 @@ builder.Services.AddDbContext<Context>(options =>
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddScoped<ClienteBLL>();
 

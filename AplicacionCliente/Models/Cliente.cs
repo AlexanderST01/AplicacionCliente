@@ -4,12 +4,19 @@ namespace AplicacionCliente.Models
 {
     public class Cliente
     {
+        [Key]
         public int ClienteId { get; set; }
-        public string Nombre { get; set; }
-        public string Telefono { get; set; }
-        public string Celular { get; set; }
-        public string Rnc { get; set; }
-        public string Email { get; set; }
-        public string Direccion { get; set; }
+        [Required (ErrorMessage ="El nombre es obligatorio")]
+        public string? Nombre { get; set; }
+        [Required(ErrorMessage = "El Telefono es obligatorio")]
+        public string? Telefono { get; set; }
+        [Required(ErrorMessage = "El Celular es obligatorio")]
+        public string? Celular { get; set; }
+        [Required(ErrorMessage = "El Rnc es obligatorio")]
+        public string? Rnc { get; set; }
+        [Required(ErrorMessage = "El Emial es obligatorio")]
+        public string? Email { get; set; }
+        [Required(ErrorMessage = "La Direccion es obligatorio")]
+        public string? Direccion { get; set; }
     }
 }

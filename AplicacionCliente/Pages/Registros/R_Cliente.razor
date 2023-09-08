@@ -1,0 +1,124 @@
+﻿@page "/RegistroCliente"
+@page "/RegistroCliente/{ClienteId:int}"
+@using AplicacionCliente.BLL;
+@using AplicacionCliente.Models;
+@inject ClienteBLL clienteBLL
+
+<EditForm Model="cliente" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+    <div class="card" style="width: 60rem">
+        <div class="card-header">
+            <h1>Registro cliente</h1>
+        </div>
+        <div class="card-body">
+            <label>ID:</label>
+            <div class="input-group" style="width: 14rem">
+                <InputNumber @bind-Value="cliente.ClienteId"  class="form-control"></InputNumber>
+                <button type="button" class="btn btn-primary oi oi-magnifying-glass" @onclick="Buscar"></button>               
+            </div>   
+            <label >Nombre: </label>
+            <InputText @bind-Value="cliente.Nombre" class="form-control"></InputText>
+            <ValidationMessage For="@(() => cliente.Nombre)" />
+            @if (nombreRepetido)
+            {
+                <p class="validation-message">Este nombre ya esta registrado</p>
+            }
+            <label>Email:</label>
+            <InputText @bind-Value="cliente.Email" class="form-control" type="email"></InputText>
+            <ValidationMessage For="@(() => cliente.Email)" />
+            <br />
+            <div class="input-group">
+                <label style="margin-right:1rem">Rnc:</label>
+                <div>
+                    <InputText @bind-Value="cliente.Rnc" class="form-control"></InputText>
+                    <ValidationMessage For="@(() => cliente.Rnc)" />
+                    @if (RncRepetido)
+                    {
+                        <p class="validation-message">Este Rnc ya esta registrado</p>
+                    }
+                </div>
+                <label style="margin-left:1rem; margin-right:1rem">Celular:</label>
+                <InputText @bind-Value="cliente.Celular" class="form-control"></InputText>
+                <ValidationMessage For="@(() => cliente.Celular)" />                
+                <label style="margin-left:1rem; margin-right:1rem">Telefono:</label>
+                <InputText @bind-Value="cliente.Telefono" class="form-control"></InputText>
+                <ValidationMessage For="@(() => cliente.Telefono)" />                
+            </div>
+            <br />
+             <div>
+                <label style="margin-right:1rem">Direccio:</label>
+                <InputText @bind-Value="cliente.Direccion" class="form-control"></InputText>
+                <ValidationMessage For="@(() => cliente.Direccion)" />
+             </div>
+        </div>
+        <div class="card-footer text-center">
+            <button type="button" class="btn btn-primary" @onclick="Nuevo">Nuevo <i class="oi oi-file" /></button>
+            <button class="btn btn-success">Guardar <i class="oi oi-document" /></button>
+            <button type="button" class="btn btn-danger" @onclick="Eliminar">Eliminar <i class="oi oi-trash" /></button>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int ClienteId { get; set; }
+
+    public Cliente cliente { get; set; } = new Cliente();
+
+    public bool nombreRepetido = false;
+
+    public bool RncRepetido = false;
+
+    protected override void OnInitialized()
+    {
+        if (ClienteId > 0)
+        {
+            this.cliente.ClienteId = ClienteId;
+            this.Buscar();
+        }
+    }
+
+    void Buscar()
+    {
+        var clientesEncontrado = clienteBLL.Buscar(cliente.ClienteId);
+        if (clientesEncontrado != null)
+        {
+            this.cliente = clientesEncontrado;
+        }
+    }
+
+    void Nuevo()
+    {
+        this.cliente = new Cliente();
+        nombreRepetido = false;
+        RncRepetido = false;
+    }
+
+    void Guardar()
+    {
+        if (!Validar() && clienteBLL.Guardar(this.cliente))
+        {
+            this.Nuevo();
+        }
+    }
+
+    void Eliminar()
+    {
+        clienteBLL.Eliminar(this.cliente);
+
+        Nuevo();
+
+    }
+
+    bool  Validar()
+    {
+        nombreRepetido = clienteBLL.BuscarNombre(cliente.Nombre) != null;
+        RncRepetido = clienteBLL.BuscarRnc(cliente.Rnc) != null;
+
+        return nombreRepetido || RncRepetido;
+    }
+        
+}
+
+
+
