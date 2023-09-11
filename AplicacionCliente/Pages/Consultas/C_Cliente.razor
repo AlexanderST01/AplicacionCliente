@@ -7,12 +7,12 @@
 
 <div>
     <h3>Consulta Prioridades</h3>
-    <div class="input-group" style=" width: 60rem;">
+    <div class="input-group" style=" width: 10rem;">
         <InputNumber @bind-Value="ID" class="form-control"></InputNumber>
         <button type="button" class="btn btn-outline-primary oi oi-magnifying-glass" @onclick="Buscar"></button>
         <button type="button" class="btn btn-outline-primary oi oi-reload" @onclick="Reiniciar"></button>
     </div>
-    <table border="1" style=" width: 60rem;" class="table table-condensed table-bordered table-hover">
+    <table border="1" style=" width: 80rem;" class="table table-condensed table-bordered table-hover">
         <thead>
             <tr class="table-secondary">
                 <th scope="col">ID</th>
@@ -28,13 +28,13 @@
             @foreach (var tabla in L_Cliente)
             {
                 <tr>
-                    <th scope="row">@tabla.ClienteId</th>
-                    <th scope="row">@tabla.Nombre</th>
-                    <th scope="row">@tabla.Telefono</th>
-                    <th scope="row">@tabla.Celular</th>
-                    <th scope="row">@tabla.Rnc</th>
-                    <th scope="row">@tabla.Email</th>
-                    <th scope="row">@tabla.Direccion</th>
+                    <th scope="row" style="font-size: 1vw">@tabla.ClienteId</th>
+                    <th scope="row" style="font-size: 1vw">@tabla.Nombre</th>
+                    <th scope="row" style="font-size: 1vw">@tabla.Telefono</th>
+                    <th scope="row" style="font-size: 1vw">@tabla.Celular</th>
+                    <th scope="row" style="font-size: 1vw">@tabla.Rnc</th>
+                    <th scope="row" style="font-size: 1vw">@tabla.Email</th>
+                    <th scope="row" style="font-size: 1vw">@tabla.Direccion</th>
                 </tr>
             }
         </tbody>
