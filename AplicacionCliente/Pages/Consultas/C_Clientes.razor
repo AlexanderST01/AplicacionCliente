@@ -1,48 +1,49 @@
 ﻿@page "/ConsultaCliente"
-
 @using AplicacionCliente.BLL;
 @using AplicacionCliente.Models;
-
 @inject ClientesBLL clientesBLL
 
 <div>
-    <h3>Consulta Prioridades</h3>
-    <div class="input-group" style=" width: 10rem;">
-        <InputNumber @bind-Value="ID" class="form-control"></InputNumber>
-        <button type="button" class="btn btn-outline-primary oi oi-magnifying-glass" @onclick="Buscar"></button>
-        <button type="button" class="btn btn-outline-primary oi oi-reload" @onclick="Reiniciar"></button>
+    <h3>Consulta Prioridades</h3>   
+    <div class="row justify-content-start ">
+        <div class=" col-sm-5 col-md-6 col-lg-7 col-xl-xxl-8 ">
+            <div class="input-group" style=" width: 10rem;">
+                <InputNumber @bind-Value="ID" class="form-control"></InputNumber>
+                <button type="button" class="btn btn-outline-primary oi oi-magnifying-glass" @onclick="Buscar"></button>
+                <button type="button" class="btn btn-outline-primary oi oi-reload" @onclick="Reiniciar"></button>
+            </div>
+            <div class="table-responsive ">
+                <table border="1" class="table table-bordered table-striped ">
+                    <thead>
+                        <tr class="table-secondary">
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col">Celular</th>
+                            <th scope="col">Rnc</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Direccion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var tabla in L_Cliente)
+                        {
+                            <tr>
+                                <td scope="row">@tabla.ClienteId</td>
+                                <td scope="row">@tabla.Nombre</td>
+                                <td scope="row">@tabla.Telefono</td>
+                                <td scope="row">@tabla.Celular</td>
+                                <td scope="row">@tabla.Rnc</td>
+                                <td scope="row">@tabla.Email</td>
+                                <td scope="row">@tabla.Direccion</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <table border="1" style=" width: 80rem;" class="table table-condensed table-bordered table-hover">
-        <thead>
-            <tr class="table-secondary">
-                <th scope="col">ID</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Telefono</th>
-                <th scope="col">Celular</th>
-                <th scope="col">Rnc</th>
-                <th scope="col">Email</th>
-                <th scope="col">Direccion</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var tabla in L_Cliente)
-            {
-                <tr>
-                    <th scope="row" style="font-size: 1vw">@tabla.ClienteId</th>
-                    <th scope="row" style="font-size: 1vw">@tabla.Nombre</th>
-                    <th scope="row" style="font-size: 1vw">@tabla.Telefono</th>
-                    <th scope="row" style="font-size: 1vw">@tabla.Celular</th>
-                    <th scope="row" style="font-size: 1vw">@tabla.Rnc</th>
-                    <th scope="row" style="font-size: 1vw">@tabla.Email</th>
-                    <th scope="row" style="font-size: 1vw">@tabla.Direccion</th>
-                </tr>
-            }
-        </tbody>
-    </table>
 </div>
-
-
-
 
 @code {
     public List<Clientes> L_Cliente { get; set; } = new List<Clientes>();
