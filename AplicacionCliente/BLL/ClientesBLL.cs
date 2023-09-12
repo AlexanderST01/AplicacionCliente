@@ -7,7 +7,7 @@ namespace AplicacionCliente.BLL
 {
     public class ClientesBLL
     {
-        private Context _contexto;
+        private readonly Context _contexto;
 
         public ClientesBLL (Context contexto)
         {
