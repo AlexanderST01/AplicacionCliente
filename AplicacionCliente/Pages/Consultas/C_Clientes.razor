@@ -26,7 +26,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var tabla in L_Cliente)
+                        @foreach (var tabla in Clientes)
                         {
                             <tr>
                                 <td scope="row">@tabla.ClienteId</td>
@@ -46,22 +46,22 @@
 </div>
 
 @code {
-    public List<Clientes> L_Cliente { get; set; } = new List<Clientes>();
+    public List<Clientes> Clientes { get; set; } = new List<Clientes>();
 
     public int ID { get; set; }
 
     protected override void OnInitialized()
     {
-        L_Cliente = clientesBLL.GetList(g => true);
+        Clientes = clientesBLL.GetList(g => true);
     }
 
     public void Buscar()
     {
-        L_Cliente = clientesBLL.GetList(l => l.ClienteId == ID);
+        Clientes = clientesBLL.GetList(l => l.ClienteId == ID);
     }
 
     public void Reiniciar()
     {
-        L_Cliente = clientesBLL.GetList(l => true);
+        Clientes = clientesBLL.GetList(l => true);
     }
 }
