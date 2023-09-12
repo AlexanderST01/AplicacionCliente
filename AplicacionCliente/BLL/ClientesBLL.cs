@@ -56,20 +56,7 @@ namespace AplicacionCliente.BLL
                 .AsNoTracking()
                 .SingleOrDefault();
         }
-        public Clientes? BuscarNombre(String? nombre)
-        {
-            return _contexto.Clientes
-                .Where(b => b.Nombre == nombre)
-                .AsNoTracking()
-                .FirstOrDefault();
-        }
-        public Clientes? BuscarRnc(String? rnc)
-        {
-            return _contexto.Clientes
-                .Where(b => b.Rnc == rnc)
-                .AsNoTracking()
-                .FirstOrDefault();
-        }
+
         public List<Clientes> GetList(Expression<Func<Clientes, bool>> criterio)
         {
             return _contexto.Clientes

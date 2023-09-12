@@ -112,9 +112,8 @@
 
     bool  Validar()
     {
-        nombreRepetido = clienteBLL.BuscarNombre(cliente.Nombre) != null;
-        RncRepetido = clienteBLL.BuscarRnc(cliente.Rnc) != null;
-
+        nombreRepetido = clienteBLL.GetList(c => c.Nombre == cliente.Nombre).Any(); ;
+        RncRepetido = clienteBLL.GetList(c => c.Rnc == cliente.Rnc).Any();
         return nombreRepetido || RncRepetido;
     }
         
