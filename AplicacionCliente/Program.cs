@@ -17,7 +17,7 @@ builder.Services.AddDbContext<Context>(options =>
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
-builder.Services.AddScoped<ClienteBLL>();
+builder.Services.AddScoped<ClientesBLL>();
 
 var app = builder.Build();
 

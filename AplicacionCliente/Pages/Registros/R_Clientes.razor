@@ -2,7 +2,7 @@
 @page "/RegistroCliente/{ClienteId:int}"
 @using AplicacionCliente.BLL;
 @using AplicacionCliente.Models;
-@inject ClienteBLL clienteBLL
+@inject ClientesBLL clienteBLL
 
 <EditForm Model="cliente" OnValidSubmit="Guardar">
     <DataAnnotationsValidator />
@@ -56,14 +56,14 @@
             <button class="btn btn-success">Guardar <i class="oi oi-document" /></button>
             <button type="button" class="btn btn-danger" @onclick="Eliminar">Eliminar <i class="oi oi-trash" /></button>
         </div>
-    </div>
+    </div>    
 </EditForm>
 
 @code {
     [Parameter]
     public int ClienteId { get; set; }
 
-    public Cliente cliente { get; set; } = new Cliente();
+    public Clientes cliente { get; set; } = new Clientes();
 
     public bool nombreRepetido = false;
 
@@ -89,7 +89,7 @@
 
     void Nuevo()
     {
-        this.cliente = new Cliente();
+        this.cliente = new Clientes();
         nombreRepetido = false;
         RncRepetido = false;
     }
